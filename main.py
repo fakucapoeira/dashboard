@@ -2,6 +2,8 @@ import streamlit as st
 import headcount
 import capaweb
 import foto
+import incidentes
+
 # Obtener parámetros de consulta
 # Configuración inicial de la página
 st.set_page_config(page_title="Aplicación", layout="wide")
@@ -14,7 +16,8 @@ sources = {
     "26ede568-1f3f-4a26-9755-37dc36131112": {
         "file": "c:\\gvwin\\tvom\\tmp\\dashboard.xlsx",
         "file2": "c:\\gvwin\\tvom\\tmp\\dashboard_head.xlsx",
-        "file3": f"C:\\gvwin\\tvom\\imag\\mae010\\{legajo}.jpg",
+        "file3": f"C:\\gvwin\\tvom\\imag\\mae010\\foto\\{legajo}.jpg",
+        "file4": f"C:\\gvwin\\tvom\\tmp\\dashboard_incidentes.xlsx",
         "capaweb": True,
         "headcount": True,
         "foto": True,
@@ -33,8 +36,9 @@ else:
     # Obtener configuración correspondiente al UUID
     config = sources[visualization]
     file_path_capa = config["file"]
-    file_path_head = config["file2"]
+    file_path_head = config["file2"]    
     file_path_foto = config["file3"]
+    file_path_incid = config["file4"]
 
     # Crear lista de módulos habilitados
     available_modules = []
@@ -44,6 +48,9 @@ else:
         available_modules.append("HeadCount")
     if config["foto"]:
         available_modules.append("Actualiza tus datos")
+    if config["incidentes"]:
+        available_modules.append("Servicio Médico")
+            
         
 
     # Preguntar al usuario qué módulo quiere ver
@@ -60,4 +67,7 @@ else:
     elif selected_module == "Actualiza tus datos":
         #st.subheader("Módulo: HeadCount")
         foto.run(file_path_foto)  # Delegar al módulo `foto`
+    elif selected_module == "Servicio Medico":        
+        incidentes.run(file_path_incid)  # Delegar al módulo de incidentes
+            
         

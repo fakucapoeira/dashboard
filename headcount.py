@@ -178,7 +178,10 @@ def run(file_path):
         x=df_combinado_filtrado['PERIODO'],
         y=df_combinado_filtrado['INGRESOS'],
         name='Ingresos',
-        marker_color='blue'
+        marker_color='blue',
+        text=df_combinado_filtrado['INGRESOS'],  # Agregar valores como texto
+        textposition='outside',  # Posicionar el texto afuera de la barra
+        textangle=0  # Mantener el texto horizontal
     ))
 
     # Agregar barras de egresos
@@ -186,14 +189,20 @@ def run(file_path):
         x=df_combinado_filtrado['PERIODO'],
         y=df_combinado_filtrado['EGRESOS'],
         name='Egresos',
-        marker_color='red'
+        marker_color='red',
+        text=df_combinado_filtrado['EGRESOS'],  # Agregar valores como texto
+        textposition='outside',  # Posicionar el texto afuera de la barra
+        textangle=0  # Mantener el texto horizontal
     ))
     # Agregar barras de  dOTACION
     fig.add_trace(go.Bar(
         x=df_combinado_filtrado['PERIODO'],
         y=df_combinado_filtrado['DOTACION'],
         name='Dotación',
-        marker_color='green'
+        marker_color='green',
+        text=df_combinado_filtrado['DOTACION'],  # Agregar valores como texto
+        textposition='outside',  # Posicionar el texto afuera de la barra
+        textangle=0  # Mantener el texto horizontal
     ))
     # Configuración del gráfico
     fig.update_layout(
