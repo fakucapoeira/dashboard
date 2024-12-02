@@ -97,12 +97,12 @@ def run(file_path):
     df_ingresos['PERIODO'] = df_ingresos['FECHA_INGRESO'].dt.to_period('M').astype(str)
 
     # Agrupamos por FECHA_INGRESO y añadimos la columna empresa
-    df_periodo = df_ingresos.groupby('PERIODO', as_index=False).size().rename(columns={'size': 'INGRESOS'}).tail(12)
+    df_periodo = df_ingresos.groupby('PERIODO', as_index=False).size().rename(columns={'size': 'INGRESOS'})  #.tail(12)
 
     # egresos
     df_egresos = filtered_df.sort_values("FECHA_EGRESO").dropna()
     df_egresos['PERIODO'] = df_egresos['FECHA_EGRESO'].dt.to_period('M').astype(str)
-    df_periodo2 = df_egresos.groupby('PERIODO', as_index=False).size().rename(columns={'size': 'EGRESOS'}).tail(12)
+    df_periodo2 = df_egresos.groupby('PERIODO', as_index=False).size().rename(columns={'size': 'EGRESOS'})   #.tail(12)
 
     # Generar rango de periodos para calcular DOTACION
     min_periodo = filtered_df['FECHA_INGRESO'].min().to_period('M')

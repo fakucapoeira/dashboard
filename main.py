@@ -3,6 +3,7 @@ import headcount
 import capaweb
 import foto
 import incidentes
+import bandas
 
 # Obtener parámetros de consulta
 # Configuración inicial de la página
@@ -17,10 +18,13 @@ sources = {
         "file": "c:\\gvwin\\tvom\\tmp\\dashboard.xlsx",
         "file2": "c:\\gvwin\\tvom\\tmp\\dashboard_head.xlsx",
         "file3": f"C:\\gvwin\\tvom\\imag\\mae010\\foto\\{legajo}.jpg",
-        "file4": f"C:\\gvwin\\tvom\\tmp\\dashboard_incidentes.xlsx",
+        "file4": "C:\\gvwin\\solbayres\\tmp\\dashboard_incidentes.xlsx",
+        "file5": "C:\\gvwin\\tvom\\tmp\\bandas_salariales.xlsx",
         "capaweb": True,
         "headcount": True,
         "foto": True,
+        "smedico": True,
+        "bandas": True,
     },
     "2141b1d6-8705-4a95-b0e6-b4c63bdec8a1": {
         "file": "c:\\gvwin\\socotherm\\tmp\\dashboard.xlsx",
@@ -39,6 +43,7 @@ else:
     file_path_head = config["file2"]    
     file_path_foto = config["file3"]
     file_path_incid = config["file4"]
+    file_path_bandas = config["file5"]
 
     # Crear lista de módulos habilitados
     available_modules = []
@@ -48,8 +53,13 @@ else:
         available_modules.append("HeadCount")
     if config["foto"]:
         available_modules.append("Actualiza tus datos")
-    if config["incidentes"]:
+        
+    if config["smedico"]:
         available_modules.append("Servicio Médico")
+        
+    if config["bandas"]:
+        available_modules.append("Bandas Salariales")
+            
             
         
 
@@ -67,7 +77,9 @@ else:
     elif selected_module == "Actualiza tus datos":
         #st.subheader("Módulo: HeadCount")
         foto.run(file_path_foto)  # Delegar al módulo `foto`
-    elif selected_module == "Servicio Medico":        
+    elif selected_module == "Servicio Médico":
         incidentes.run(file_path_incid)  # Delegar al módulo de incidentes
+    elif selected_module == "Bandas Salariales":
+        bandas.run(file_path_bandas)  # Delegar al módulo de Bandas Salariales
             
         

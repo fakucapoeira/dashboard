@@ -150,7 +150,19 @@ def run(file_path):
 
     with cl2:
         with st.expander("Datos por Curso"):
-            st.write(eje_df2.style.background_gradient(cmap="Oranges"))
+            # Crear una columna temporal para mostrar la fecha formateada, sin alterar los datos originales
+            eje_df2['FECHA FORMATEADA'] = eje_df2['FECHA DESDE'].dt.strftime('%d/%m/%Y')
+            eje_df2['FECHA FORMATEADA2'] = eje_df2['FECHA HASTA'].dt.strftime('%d/%m/%Y')
+            # Eliminar la columna "FECHA FORMATEADA" de su posición actual y guardarla
+            col_formateada = eje_df2.pop('FECHA FORMATEADA')
+            col_formateada2 = eje_df2.pop('FECHA FORMATEADA2')
+
+            # Insertar la columna "FECHA FORMATEADA" en la posición deseada (índice 2, que corresponde a la columna 3)
+            eje_df2.insert(2, 'FECHA D.', col_formateada)
+            eje_df2.insert(3, 'FECHA H.', col_formateada2)
+    
+            # Usar la columna formateada solo para la visualización
+            st.write(eje_df2.drop(columns=['FECHA DESDE', 'FECHA HASTA']).style.background_gradient(cmap="Oranges"))
             csv = eje_df2.to_csv(sep=';', index=False).encode('utf-8')
             st.download_button("Download Data", data=csv, file_name="Cursos_datos.csv", mime="text/csv",
                             help='Click para bajar los datos en csv')
@@ -225,8 +237,22 @@ def run(file_path):
     )
     st.plotly_chart(fig4, use_container_width=True, height=200)
     with st.expander("horas"):
+        
+        # Crear una columna temporal para mostrar la fecha formateada, sin alterar los datos originales
+        df_horas['FECHA FORMATEADA'] = df_horas['FECHA DESDE'].dt.strftime('%d/%m/%Y')
+        df_horas['FECHA FORMATEADA2'] = df_horas['FECHA HASTA'].dt.strftime('%d/%m/%Y')
+            # Eliminar la columna "FECHA FORMATEADA" de su posición actual y guardarla
+        col_formateada = df_horas.pop('FECHA FORMATEADA')
+        col_formateada2 = df_horas.pop('FECHA FORMATEADA2')
+
+            # Insertar la columna "FECHA FORMATEADA" en la posición deseada (índice 2, que corresponde a la columna 3)
+        df_horas.insert(2, 'FECHA D.', col_formateada)
+        df_horas.insert(3, 'FECHA H.', col_formateada2)
+    
+        
+            
         # st.dataframe(df_horas.style.background_gradient(cmap="Blues"))
-        styled_df = df_horas.style.background_gradient(
+        styled_df = df_horas.drop(columns=['FECHA DESDE', 'FECHA HASTA']).style.background_gradient(
             cmap="Blues").format({'HORAS': '{:.2f}'})
         st.write(styled_df)
         csv = df_horas.to_csv(sep=';', index=False).encode('utf-8')
