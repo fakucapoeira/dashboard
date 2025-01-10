@@ -8,6 +8,7 @@ import seaborn as sns
 
 
 def run(file_path):
+    
     # HTML y CSS para personalizar fuentes
     st.markdown("""
         <style>
@@ -22,9 +23,9 @@ def run(file_path):
         }
         </style>
     """, unsafe_allow_html=True)
+    ruta = file_path
 
-
-    df = pd.read_excel("C:\\gvwin\\tvom\\tmp\\bandas_salariales.xlsx", engine="openpyxl")
+    df = pd.read_excel(ruta, engine="openpyxl")
 
 
     #  EMPRESA
