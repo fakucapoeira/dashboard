@@ -79,7 +79,6 @@ sources = {
 # Validar si el parámetro `visualization` está en las fuentes
 if visualization not in sources:
     st.error("El parámetro 'visualization' no es válido.")
-#elif ts - tiempo > 30:
 #    st.error("Tiempo acabado")
     
 else:
