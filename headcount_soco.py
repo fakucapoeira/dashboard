@@ -40,6 +40,7 @@ def run(file_path):
         aws_secret_access_key=secret_key,
         region_name=region
     )
+    df = None
     try:
         response = s3.get_object(Bucket=bucket, Key=ARCHIVO_S3)
         # Leer el contenido del archivo como un DataFrame de pandas
