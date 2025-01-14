@@ -1,0 +1,12 @@
+# this is needed for local development
+[Server]
+
+# no default browser
+headless = true
+
+#required for local development
+runOnSave = true
+
+#required for local development
+fileMatcherType = "pol1
+
